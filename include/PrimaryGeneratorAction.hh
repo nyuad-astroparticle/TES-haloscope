@@ -8,7 +8,11 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleTable.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4OpticalPhoton.hh"
 #include "Randomize.hh"
+
+#include <iostream>
+#include <cmath>
 
 
 // Use classes as they are
@@ -20,6 +24,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     public:
 		PrimaryGeneratorAction();
 		~PrimaryGeneratorAction();
+    virtual void GeneratePrimaries(G4Event*);
 
     private:
         G4ParticleGun * particleGun;
