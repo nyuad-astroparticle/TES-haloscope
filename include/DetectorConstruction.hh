@@ -9,6 +9,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4NistManager.hh"
 #include "G4PVPlacement.hh"
+#include "G4GDMLParser.hh"
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {

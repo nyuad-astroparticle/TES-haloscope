@@ -21,7 +21,7 @@ void PrimaryGeneratorAction :: GeneratePrimaries(G4Event *anEvent)
         G4double phi    = G4UniformRand()*2*pi;
 
         // Chose theta accoring to cos^2 as Isaac suggested
-        G4double theta  = std::cos(G4UniformRand()*pi);
+        G4double theta  = std::sin(G4UniformRand()*pi);
         theta *= theta*pi;
 
     G4ThreeVector direction(std::sin(theta) * std::cos(phi), std::cos(theta), std::sin(theta)*std::sin(phi));
@@ -45,7 +45,7 @@ void PrimaryGeneratorAction :: GeneratePrimaries(G4Event *anEvent)
 
         G4int layer     = CLHEP::RandFlat::shootInt(23);
         G4int biLayer   = CLHEP::RandFlat::shootInt(1);
-        G4double height = layer*(dSi3N4+dSiO2) + biLayer*dSiO2;  
+        G4double height = (layer)*(dSi3N4+dSiO2) + biLayer*dSiO2;  
 
         G4ThreeVector position(R*std::cos(alpha),height,R*std::sin(alpha));
 

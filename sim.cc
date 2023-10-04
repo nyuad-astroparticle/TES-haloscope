@@ -27,6 +27,8 @@ int main(int argc, char ** argv)
     uiManager->ApplyCommand("/vis/viewer/set/autoRefresh true");
     uiManager->ApplyCommand("/vis/scene/add/trajectories smooth");
     uiManager->ApplyCommand("/vis/scene/endOfEventAction accumulate -1");
+    // uiManager->ApplyCommand("/vis/modeling/trajectories/create/drawByParticleID");
+    uiManager->ApplyCommand("/vis/scene/add/axes");
 
     ui -> SessionStart();
     delete ui;
