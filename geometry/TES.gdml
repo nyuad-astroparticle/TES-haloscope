@@ -13,7 +13,7 @@
     </materials>
 
     <solids>
-        <box name="solidTES" lunit="mm" x="1" y="1" z="1"/>
+        <box name="solidTES" lunit="micrometer" x="20" y="20" z="1"/>
     </solids>
 
     <structure>

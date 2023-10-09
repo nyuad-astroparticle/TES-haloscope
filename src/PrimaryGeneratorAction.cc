@@ -35,7 +35,7 @@ void PrimaryGeneratorAction :: GeneratePrimaries(G4Event *anEvent)
         G4double alpha  = G4UniformRand()*2*pi;
         G4double numberOfLayers = 23;
         
-        G4double lambda = 1*mm;
+        G4double lambda = 810*nm;
         // Silicon Nitride height
         G4double nSi3N4 = 2.0053;
         G4double dSi3N4 = lambda/2/nSi3N4;

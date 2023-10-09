@@ -18,7 +18,7 @@
     </materials>
 
     <solids>
-        <tube   name="solidMirrorBottom" rmin="0"    rmax="D/2"    z="1*mm"     deltaphi="360" startphi="0" aunit="deg"/>
+        <tube   name="solidMirrorBottom" rmin="0"    rmax="D/2"    z="100*nm"     deltaphi="360" startphi="0" aunit="deg"/>
 
         <opticalsurface name="opticalMirrorBottom" model="glisur" finish="polished" type="dielectric_metal" value="1.0">
             <property name="REFLECTIVITY" ref="AlReflectivity"/>

@@ -24,9 +24,9 @@ int main(int argc, char ** argv)
     G4UImanager *uiManager = G4UImanager::GetUIpointer();
     uiManager->ApplyCommand("/vis/open OGL");
     uiManager->ApplyCommand("/vis/drawVolume");
-    uiManager->ApplyCommand("/vis/viewer/set/autoRefresh true");
-    uiManager->ApplyCommand("/vis/scene/add/trajectories smooth");
-    uiManager->ApplyCommand("/vis/scene/endOfEventAction accumulate 0");
+    // uiManager->ApplyCommand("/vis/viewer/set/autoRefresh true");
+    // uiManager->ApplyCommand("/vis/scene/add/trajectories smooth");
+    // uiManager->ApplyCommand("/vis/scene/endOfEventAction accumulate -1");
     uiManager->ApplyCommand("/vis/verbose 0");
     uiManager->ApplyCommand("/run/verbose 0");
 

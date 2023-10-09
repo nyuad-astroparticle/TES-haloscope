@@ -18,8 +18,8 @@
     </materials>
 
     <solids>
-        <tube   name="solidOuterMirrorTop" rmin="0"    rmax="D/2"    z="1*mm"     deltaphi="360" startphi="0" aunit="deg"/>
-        <box name="solidCut" lunit="mm" x="5" y="5" z="1"/>
+        <tube   name="solidOuterMirrorTop" rmin="0"    rmax="D/2"    z="100*nm"     deltaphi="360" startphi="0" aunit="deg"/>
+        <box name="solidCut" x="0.5*mm" y="0.5*mm" z="100*nm"/>
         <subtraction name="solidMirrorTop">
             <first  ref="solidOuterMirrorTop"/>
             <second ref="solidCut"/>

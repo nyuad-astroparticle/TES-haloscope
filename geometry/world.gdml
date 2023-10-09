@@ -4,7 +4,7 @@
     <define>
 
         <!-- Stack -->
-        <quantity   name="lambda"               value="1"                                     unit="mm"/>
+        <quantity   name="lambda"               value="810"                                     unit="nm"/>
 
         <variable   name="oxideThickness"       value="lambda/2/1.4607"/>
         <variable   name="oxideExtinction"      value="0.0012904"/>
@@ -16,12 +16,12 @@
         <rotation   name="rotation"             x="90"  y="0"   z="0" unit="deg"/>
 
         <!-- TES -->
-        <quantity   name="TESThickness"         value="1"                                       unit="mm"/>
+        <quantity   name="TESThickness"         value="1"                                       unit="micrometer"/>
         <position   name="TESPosition"          x="0"   y="stackThickness/2+TESThickness/2"       z="0"/>
         <rotation   name="TESRotation"          x="90"  y="0"   z="0" unit="deg"/>
 
         <!-- Mirrors -->
-        <quantity   name="mirrorThickness"      value="1" unit="mm"/>
+        <quantity   name="mirrorThickness"      value="100" unit="nm"/>
         <position   name="mirrorTop"            x="0"   y="stackThickness/2+mirrorThickness/2" z="0"/>
         <position   name="mirrorBottom"         x="0"   y="-stackThickness/2-mirrorThickness/2" z="0"/>
         <matrix     coldim="2"  name="AlReflectivity"   values="1.53*eV 0.85"/>

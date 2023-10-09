@@ -3,7 +3,7 @@
 
     <define>
         <quantity   name="D"                    value="5.08"                                    unit="cm"/>
-        <quantity   name="lambda"               value="1"                                      unit="mm"/>
+        <quantity   name="lambda"               value="810"                                     unit="nm"/>
         <!-- <matrix     coldim="2"                  name="oxideRindex"                              values="1.51*eV 1.4606 1.53*eV 1.4607 1.55*eV 1.4608"/> -->
         <matrix     coldim="2"                  name="oxideRindex"                              values="1.53*eV 1.4607"/>
        
