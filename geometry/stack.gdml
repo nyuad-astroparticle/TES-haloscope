@@ -2,21 +2,26 @@
 <gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/ti602/geant4/geant4-v11.1.2/source/persistency/gdml/schema/gdml.xsd">
 
     <define>
-        <quantity   name="R"                    value="5.08"                                    unit="cm"/>
-        <quantity   name="lambda"               value="810"                                     unit="nm"/>
-
-        <matrix     coldim="1"                  name="oxideRindex"                              values="1.4607"/>
-        <variable   name="oxideThickness"       value="lambda/2/oxideRindex[1]"/>
+        <quantity   name="D"                    value="5.08"                                    unit="cm"/>
+        <quantity   name="lambda"               value="1"                                      unit="mm"/>
+        <!-- <matrix     coldim="2"                  name="oxideRindex"                              values="1.51*eV 1.4606 1.53*eV 1.4607 1.55*eV 1.4608"/> -->
+        <matrix     coldim="2"                  name="oxideRindex"                              values="1.53*eV 1.4607"/>
+       
+        <variable   name="oxideThickness"       value="lambda/2/1.4607"/>
         <variable   name="oxideExtinction"      value="0.0012904"/>
-        <matrix     coldim="1"                  name="oxideAbsLength"                           values="lambda*4*pi/oxideExtinction"/>
+        <matrix     coldim="2"                  name="oxideAbsLength"                           values="1.53*eV lambda*4*pi/oxideExtinction"/>
 
-        <matrix     coldim="1"                  name="nitrideRindex"                            values="2.0053"/>
-        <variable   name="nitrideThickness"     value="lambda/2/nitrideRindex[1]"/>
+        <!-- <matrix     coldim="2"                  name="nitrideRindex"                            values="1.51*eV 2.0229 1.53*eV 2.0053 1.55*eV 2.0242"/> -->
+        <matrix     coldim="2"                  name="nitrideRindex"                            values="1.53*eV 2.0053"/>
+        <variable   name="nitrideThickness"     value="lambda/2/2.0053"/>
 
         <variable   name="combinedThickness"    value="oxideThickness + nitrideThickness"/>
 
-        <variable   name="i"                    value="0"/>
         <rotation   name="rotation"             x="0" y="0" z="0" unit="deg"/>
+
+        <variable   name="i"                    value="0"/>
+        <constant   name="numberOfLayers"       value="23"/>
+
 
     </define>
 
@@ -35,31 +40,31 @@
         </element>
 
         <material name="siliconOxide" state="solid" formula="siliconOxide">
+            <property name="RINDEX" ref="oxideRindex"/>
             <D value="2.65" unit="g/cm3"/>
             <composite n="1" ref="Silicon"/>
             <composite n="2" ref="Oxygen"/>
-            <property name="RINDEX" ref="oxideRindex"/>
             <property name="ABSLENGTH" ref="oxideAbsLength"/>
         </material>
         
         <material name="siliconNitride" state="solid" formula="siliconNitride">
+            <property name="RINDEX" ref="nitrideRindex"/>
             <D value="3.17" unit="g/cm3"/>
             <composite n="3" ref="Silicon"/>
             <composite n="4" ref="Nitrogen"/>
-            <property name="RINDEX" ref="nitrideRindex"/>
         </material>
 
     </materials>
 
     <solids>
-        <tube   name="solidOxideLayer"      rmin="0"    rmax="R" z="oxideThickness"     deltaphi="360" startphi="0" aunit="deg"/>
-        <tube   name="solidNitrideLayer"    rmin="0"    rmax="R" z="nitrideThickness"   deltaphi="360" startphi="0" aunit="deg"/>
-        <box    name="solidStack"           x="R*2"     z="combinedThickness*23*4"      y="R*2"/>
+        <tube   name="solidOxideLayer"      rmin="0"    rmax="D/2" z="oxideThickness"     deltaphi="360" startphi="0" aunit="deg"/>
+        <tube   name="solidNitrideLayer"    rmin="0"    rmax="D/2" z="nitrideThickness"   deltaphi="360" startphi="0" aunit="deg"/>
+        <box    name="solidStack"           x="D"     z="combinedThickness*numberOfLayers"      y="D"/>
     </solids>
 
     <structure>
 
-        <loop for="i" from="0" to="22" step="1">
+        <loop for="i" from="1" to="numberOfLayers" step="1">
             
             <volume name="logicOxideLayer[i]">
                 <materialref ref="siliconOxide"/>
@@ -78,17 +83,17 @@
             <materialref ref="G4_Galactic"/>
             <solidref ref="solidStack"/>
 
-            <loop for="i" from="0" to="22" step="1">
+            <loop for="i" from="1" to="numberOfLayers" step="1">
                 
                 <physvol>
                     <volumeref ref="logicOxideLayer[i]"/>
-                    <position name="posOxideLayer[i]" x="0" y="0" z="i*combinedThickness + oxideThickness/2"/>
+                    <position name="posOxideLayer[i]" x="0" y="0" z="(-numberOfLayers/2+i-1)*combinedThickness + oxideThickness/2"/>
                     <rotationref ref="rotation"/>
                 </physvol>
 
                 <physvol>
                     <volumeref ref="logicNitrideLayer[i]"/>
-                    <position name="posNitrideLayer[i]" x="0" y="0" z="i*combinedThickness + oxideThickness + nitrideThickness/2"/>
+                    <position name="posNitrideLayer[i]" x="0" y="0" z="(-numberOfLayers/2+i-1)*combinedThickness + oxideThickness + nitrideThickness/2"/>
                     <rotationref ref="rotation"/>
                 </physvol>
            

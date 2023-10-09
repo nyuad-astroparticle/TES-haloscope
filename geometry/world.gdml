@@ -2,8 +2,30 @@
 <gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/ti602/geant4/geant4-v11.1.2/source/persistency/gdml/schema/gdml.xsd">
 
     <define>
-        <position name="stackPosition"  x="0"   y="0"   z="0"/>
-        <rotation name="rotation"       x="90"  y="0"   z="0" unit="deg"/>
+
+        <!-- Stack -->
+        <quantity   name="lambda"               value="1"                                     unit="mm"/>
+
+        <variable   name="oxideThickness"       value="lambda/2/1.4607"/>
+        <variable   name="oxideExtinction"      value="0.0012904"/>
+
+        <variable   name="nitrideThickness"     value="lambda/2/2.0053"/>
+        <variable   name="combinedThickness"    value="oxideThickness + nitrideThickness"/>    
+        <variable   name="stackThickness"       value="combinedThickness*23"/>
+        <position   name="stackPosition"        x="0"   y="0"   z="0"/>
+        <rotation   name="rotation"             x="90"  y="0"   z="0" unit="deg"/>
+
+        <!-- TES -->
+        <quantity   name="TESThickness"         value="1"                                       unit="mm"/>
+        <position   name="TESPosition"          x="0"   y="stackThickness/2+TESThickness/2"       z="0"/>
+        <rotation   name="TESRotation"          x="90"  y="0"   z="0" unit="deg"/>
+
+        <!-- Mirrors -->
+        <quantity   name="mirrorThickness"      value="1" unit="mm"/>
+        <position   name="mirrorTop"            x="0"   y="stackThickness/2+mirrorThickness/2" z="0"/>
+        <position   name="mirrorBottom"         x="0"   y="-stackThickness/2-mirrorThickness/2" z="0"/>
+        <matrix     coldim="2"  name="AlReflectivity"   values="1.53*eV 0.85"/>
+
     </define>
 
     <materials>
@@ -15,7 +37,7 @@
 
     <structure>
 
-        <volume name="physWorld">
+        <volume name="World">
             <materialref ref="G4_Galactic"/>
             <solidref ref="solidWorld"/>
         </volume>
@@ -31,7 +53,21 @@
             </physvol>
 
             <physvol>
-                <volumeref ref="physWorld"/>
+                <file name="./geometry/TES.gdml"/>
+                <positionref ref="TESPosition"/>
+                <rotationref ref="TESRotation"/>
+            </physvol>
+
+            <physvol>
+                <file name="./geometry/mirrorTop.gdml"/>
+                <positionref ref="mirrorTop"/>
+                <rotationref ref="TESRotation"/>
+            </physvol>
+
+            <physvol>
+                <file name="./geometry/mirrorBottom.gdml"/>
+                <positionref ref="mirrorBottom"/>
+                <rotationref ref="TESRotation"/>
             </physvol>
 
         </volume>

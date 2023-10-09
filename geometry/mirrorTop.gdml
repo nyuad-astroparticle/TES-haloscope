@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/ti602/geant4/geant4-v11.1.2/source/persistency/gdml/schema/gdml.xsd">
+
+    <define>
+        <quantity               name="D"                value="5.08"            unit="cm"/>
+        <matrix     coldim="2"  name="AlReflectivity"   values="1.53*eV 0.85"/>
+        <!-- <matrix     coldim="2"  name="AlRindex"         values="1.53*eV 2.7673"/> -->
+    </define>
+
+    <materials>
+
+        <material name="Al"  Z="13" state="solid">
+            <D value="2.7" unit="g/cm3"/>
+            <atom value="26.982"/>
+            <!-- <property name="RINDEX" ref="AlRindex"/> -->
+        </material>
+
+    </materials>
+
+    <solids>
+        <tube   name="solidOuterMirrorTop" rmin="0"    rmax="D/2"    z="1*mm"     deltaphi="360" startphi="0" aunit="deg"/>
+        <box name="solidCut" lunit="mm" x="5" y="5" z="1"/>
+        <subtraction name="solidMirrorTop">
+            <first  ref="solidOuterMirrorTop"/>
+            <second ref="solidCut"/>
+        </subtraction>
+
+        <opticalsurface name="opticalMirrorTop" model="glisur" finish="polished" type="dielectric_metal" value="1.0">
+            <property name="REFLECTIVITY" ref="AlReflectivity"/>
+        </opticalsurface>
+    </solids>
+
+    <structure>
+        <volume name="logicMirrorTop">
+            <materialref ref="Al"/>
+            <solidref ref="solidMirrorTop"/>
+        </volume>
+
+        <skinsurface name="mirrorTopSurface" surfaceproperty="opticalMirrorTop">
+            <volumeref ref="logicMirrorTop"/>
+        </skinsurface>
+    </structure>
+
+    <setup name="Default" version="1.0">
+        <world ref="logicMirrorTop"/>
+    </setup>
+
+</gdml>

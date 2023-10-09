@@ -8,15 +8,18 @@ DetectorConstruction :: ~DetectorConstruction()
 
 G4VPhysicalVolume * DetectorConstruction::Construct()
 {   
-    // G4NistManager * nist = G4NistManager::Instance();
-    // G4Material *worldMaterial = nist -> FindOrBuildMaterial("G4_Galactic");
-    // G4Box * solidWorld = new G4Box("solidWorld", 10*cm, 10*cm, 10*cm);
-    // G4LogicalVolume * logicWorld = new G4LogicalVolume(solidWorld, worldMaterial, "logicWorld");
-    // G4VPhysicalVolume * physWorld = new G4PVPlacement(0,G4ThreeVector(0,0,0), logicWorld, "physWorld", 0,false,0,true);
-    // return physWorld;
+    G4VisAttributes* invisible  = new G4VisAttributes(G4Colour(1.0, 1.0, 1.0));
+    invisible->SetVisibility(false);
+
     G4GDMLParser GDMLParser;
     GDMLParser.Read("./geometry/world.gdml");
+    GDMLParser.GetVolume("logicStack")  ->SetVisAttributes(invisible);
+    GDMLParser.GetVolume("logicTES")    ->SetVisAttributes(G4Color(1,0,0));
+    GDMLParser.GetVolume("logicMirrorBottom") ->SetVisAttributes(G4Color(0,1,0,0.5));
+    GDMLParser.GetVolume("logicMirrorTop") ->SetVisAttributes(G4Color(0,1,0,0.5));
+
     return GDMLParser.GetWorldVolume();
+
 }
 
 void DetectorConstruction :: ConstructSDandField()

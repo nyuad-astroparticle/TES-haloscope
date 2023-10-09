@@ -10,6 +10,7 @@
 #include "G4NistManager.hh"
 #include "G4PVPlacement.hh"
 #include "G4GDMLParser.hh"
+#include "G4VisAttributes.hh"
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
