@@ -2,9 +2,14 @@
 <gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/ti602/geant4/geant4-v11.1.2/source/persistency/gdml/schema/gdml.xsd">
 
     <define>
+        <matrix coldim="2"  name="TESRindex"   values="1.53*eV 1.0"/>
     </define>
 
     <materials>
+        <material name="vacuum" Z="1">
+            <D value="10e-20" unit="g/cm3"/>
+            <property name="RINDEX" ref="TESRindex"/>
+        </material>
     </materials>
 
     <solids>
@@ -13,7 +18,7 @@
 
     <structure>
         <volume name="logicTES">
-            <materialref ref="G4_Galactic"/>
+            <materialref ref="vacuum"/>
             <solidref ref="solidTES"/>
         </volume>
     </structure>

@@ -26,9 +26,10 @@ int main(int argc, char ** argv)
     uiManager->ApplyCommand("/vis/drawVolume");
     uiManager->ApplyCommand("/vis/viewer/set/autoRefresh true");
     uiManager->ApplyCommand("/vis/scene/add/trajectories smooth");
-    uiManager->ApplyCommand("/vis/scene/endOfEventAction accumulate -1");
-    // uiManager->ApplyCommand("/vis/modeling/trajectories/create/drawByParticleID");
-    // uiManager->ApplyCommand("/vis/scene/add/axes");
+    uiManager->ApplyCommand("/vis/scene/endOfEventAction accumulate 0");
+    uiManager->ApplyCommand("/vis/verbose 0");
+    uiManager->ApplyCommand("/run/verbose 0");
+
 
     ui -> SessionStart();
     delete ui;

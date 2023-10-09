@@ -14,14 +14,20 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
     G4GDMLParser GDMLParser;
     GDMLParser.Read("./geometry/world.gdml");
     GDMLParser.GetVolume("logicStack")  ->SetVisAttributes(invisible);
-    GDMLParser.GetVolume("logicTES")    ->SetVisAttributes(G4Color(1,0,0));
     GDMLParser.GetVolume("logicMirrorBottom") ->SetVisAttributes(G4Color(0,1,0,0.5));
     GDMLParser.GetVolume("logicMirrorTop") ->SetVisAttributes(G4Color(0,1,0,0.5));
-
+    
+    TES = GDMLParser.GetVolume("logicTES");    
+    TES ->SetVisAttributes(G4Color(1,0,0));
+    
+    
     return GDMLParser.GetWorldVolume();
 
 }
 
 void DetectorConstruction :: ConstructSDandField()
-{}
+{
+    SD = new SensitiveDetector("TES");
+    TES -> SetSensitiveDetector(SD);
+}
 

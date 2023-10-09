@@ -23,7 +23,7 @@ void PrimaryGeneratorAction :: GeneratePrimaries(G4Event *anEvent)
         // Chose theta accoring to cos^2 as Isaac suggested
         G4double theta  = std::sin(G4UniformRand()*pi)*std::sin(G4UniformRand()*pi);
         theta *= theta*pi;
-        // G4double theta  = 110*deg;
+        // G4double theta  = 0*deg;
 
     G4ThreeVector direction(std::sin(theta) * std::cos(phi), std::cos(theta), std::sin(theta)*std::sin(phi));
 
@@ -58,10 +58,9 @@ void PrimaryGeneratorAction :: GeneratePrimaries(G4Event *anEvent)
     // Create the photon and yeet it
     particleGun->SetParticlePosition(position);
     particleGun->SetParticleMomentumDirection(direction);
-    particleGun->SetParticleMomentum(1.53 * eV);
+    particleGun->SetParticleEnergy(1.53 * eV);
     if(photon) particleGun->SetParticleDefinition(photon);
     particleGun->SetParticlePolarization(polarization);
-    // particleGun->GeneratePrimaryVertex(anEvent);
     particleGun->GeneratePrimaryVertex(anEvent);
 
 }
