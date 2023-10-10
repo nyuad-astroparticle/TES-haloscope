@@ -9,7 +9,7 @@
        
         <variable   name="oxideThickness"       value="lambda/2/1.4607"/>
         <variable   name="oxideExtinction"      value="0.0012904"/>
-        <matrix     coldim="2"                  name="oxideAbsLength"                           values="1.53*eV lambda*4*pi/oxideExtinction"/>
+        <!-- <matrix     coldim="2"                  name="oxideAbsLength"                           values="1.53*eV 1/200.19*cm"/> -->
 
         <!-- <matrix     coldim="2"                  name="nitrideRindex"                            values="1.51*eV 2.0229 1.53*eV 2.0053 1.55*eV 2.0242"/> -->
         <matrix     coldim="2"                  name="nitrideRindex"                            values="1.53*eV 2.0053"/>
@@ -44,7 +44,7 @@
             <D value="2.65" unit="g/cm3"/>
             <composite n="1" ref="Silicon"/>
             <composite n="2" ref="Oxygen"/>
-            <property name="ABSLENGTH" ref="oxideAbsLength"/>
+            <!-- <property name="ABSLENGTH" ref="oxideAbsLength"/> -->
         </material>
         
         <material name="siliconNitride" state="solid" formula="siliconNitride">

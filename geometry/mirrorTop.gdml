@@ -4,22 +4,14 @@
     <define>
         <quantity               name="D"                value="5.08"            unit="cm"/>
         <matrix     coldim="2"  name="AlReflectivity"   values="1.53*eV 0.85"/>
-        <!-- <matrix     coldim="2"  name="AlRindex"         values="1.53*eV 2.7673"/> -->
     </define>
 
     <materials>
-
-        <material name="Al"  Z="13" state="solid">
-            <D value="2.7" unit="g/cm3"/>
-            <atom value="26.982"/>
-            <!-- <property name="RINDEX" ref="AlRindex"/> -->
-        </material>
-
     </materials>
 
     <solids>
         <tube   name="solidOuterMirrorTop" rmin="0"    rmax="D/2"    z="100*nm"     deltaphi="360" startphi="0" aunit="deg"/>
-        <box name="solidCut" x="0.5*mm" y="0.5*mm" z="100*nm"/>
+        <box    name="solidCut" x="0.5*mm" y="0.5*mm" z="100*nm"/>
         <subtraction name="solidMirrorTop">
             <first  ref="solidOuterMirrorTop"/>
             <second ref="solidCut"/>
@@ -32,7 +24,7 @@
 
     <structure>
         <volume name="logicMirrorTop">
-            <materialref ref="Al"/>
+            <materialref ref="G4_Al"/>
             <solidref ref="solidMirrorTop"/>
         </volume>
 
