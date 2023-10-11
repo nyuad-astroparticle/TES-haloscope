@@ -15,21 +15,33 @@ int main(int argc, char ** argv)
     G4MPImanager * mpiManager   = new G4MPImanager();
     G4RunManager * runManager   = new G4RunManager();
     G4MPIsession * session      = mpiManager->GetMPIsession();
-    // G4VisManager *visManager    = new G4VisExecutive();
     
     mpiManager  ->SetVerbose(0);
-    session     ->SetPrompt("MPI running");
-    // visManager  ->Initialize();
     runManager  ->SetUserInitialization(new DetectorConstruction());
     runManager  ->SetUserInitialization(new PhysicsList());
     runManager  ->SetUserInitialization(new ActionInitialization());
     runManager  ->Initialize();
     
-    session->SessionStart();
-    
-    // delete visManager;
+    session     ->SetPrompt("MPI running \n");
+
+    // Flags
+    G4String runNumber = "1000";
+    for (G4int i = 1; i < argc; i = i+2)
+    {
+        G4String flagValue = argv[i];
+        if (flagValue == "-r") runNumber = argv[i+1];
+    }
+
+    // Run beamOn
+
+    G4UImanager * uiManager = G4UImanager :: GetUIpointer();
+    uiManager   ->ApplyCommand("/run/beamOn " + runNumber);
+    session     ->SessionStart();
+
+
+    // Cleaning up
     delete mpiManager;
     delete runManager;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
