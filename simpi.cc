@@ -33,11 +33,7 @@ int main(int argc, char ** argv)
     }
 
     // Run beamOn
-
-    G4UImanager * uiManager = G4UImanager :: GetUIpointer();
-    uiManager   ->ApplyCommand("/run/beamOn " + runNumber);
-    session     ->SessionStart();
-
+    mpiManager  ->BeamOn(runNumber);
 
     // Cleaning up
     delete mpiManager;
