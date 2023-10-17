@@ -1,6 +1,6 @@
 #ifndef SensitiveDetector_hh
 #define SensitiveDetector_hh
-#endif
+
 
 #include "G4VSensitiveDetector.hh"
 #include "G4UserSteppingAction.hh"
@@ -15,3 +15,5 @@ class SensitiveDetector : public G4VSensitiveDetector
 
     private:
 };
+
+#endif

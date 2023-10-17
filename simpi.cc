@@ -10,6 +10,8 @@
 #include "G4MPIsession.hh"
 #include "G4MPImanager.hh"
 
+#include <iostream>
+
 int main(int argc, char ** argv)
 {
     G4MPImanager * mpiManager   = new G4MPImanager();
@@ -17,9 +19,12 @@ int main(int argc, char ** argv)
     G4MPIsession * session      = mpiManager->GetMPIsession();
     
     mpiManager  ->SetVerbose(0);
-    runManager  ->SetUserInitialization(new DetectorConstruction());
+    
+    DetectorConstruction * detector = new DetectorConstruction();
+
+    runManager  ->SetUserInitialization(detector);
     runManager  ->SetUserInitialization(new PhysicsList());
-    runManager  ->SetUserInitialization(new ActionInitialization());
+    runManager  ->SetUserInitialization(new ActionInitialization(detector));
     runManager  ->Initialize();
     
     session     ->SetPrompt("MPI running \n");
@@ -33,7 +38,7 @@ int main(int argc, char ** argv)
     }
 
     // Run beamOn
-    mpiManager  ->BeamOn(runNumber);
+    mpiManager  ->BeamOn(std::stoi(runNumber));
 
     // Cleaning up
     delete mpiManager;

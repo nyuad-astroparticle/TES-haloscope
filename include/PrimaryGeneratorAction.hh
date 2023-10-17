@@ -1,6 +1,6 @@
 #ifndef PrimaryGeneratorAction_hh
 #define PrimaryGeneratorAction_hh
-#endif
+
 
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
@@ -29,3 +29,5 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     private:
         G4ParticleGun * particleGun;
 };
+
+#endif

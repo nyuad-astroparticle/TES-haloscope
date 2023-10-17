@@ -15,7 +15,7 @@ G4bool SensitiveDetector :: ProcessHits(G4Step *aStep, G4TouchableHistory * aHis
     if (volume == "logicTES_PV")
     {
         if(!aTrack->GetUserInformation()) photonCount ++;
-        G4cout << "Photon Count: " << photonCount << G4endl;
+        // G4cout << "Photon Count: " << photonCount << G4endl;
     }
     return 0;
 }

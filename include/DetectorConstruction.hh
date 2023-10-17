@@ -1,6 +1,6 @@
 #ifndef DetectorConstruction_hh
 #define DetectorConstruction_hh
-#endif
+
 
 #include "G4VUserDetectorConstruction.hh"
 #include "G4LogicalVolume.hh"
@@ -25,3 +25,5 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         void ConstructSDandField() override;
         G4LogicalVolume * TES = nullptr;
 };
+
+#endif
