@@ -3,6 +3,10 @@
 
     <define>
 
+        <!-- IsValid check -->
+
+        <variable   name="flat"      value="0"/>
+
         <matrix coldim="2"  name="vacuumRindex" values="1.53*eV 1.0"/>
         <!-- Stack -->
         <quantity   name="lambda"               value="810"                                     unit="nm"/>
@@ -71,10 +75,11 @@
             </physvol>
 
             <physvol>
-                <file name="./geometry/parabolicMirror.gdml"/>
-                <positionref ref="parabolicMirror"/>
+                <file name="./geometry/mirrorBottom.gdml"/>
+                <positionref ref="mirrorBottom"/>
                 <rotationref ref="TESRotation"/>
             </physvol>
+
 
         </volume>
     </structure>

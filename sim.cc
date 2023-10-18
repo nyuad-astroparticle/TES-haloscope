@@ -10,9 +10,17 @@
 
 int main(int argc, char ** argv)
 {
+    // Flags
+    G4String world = "./geometry/worldPM.gdml";
+    for (G4int i = 1; i < argc; i = i+2)
+    {
+        G4String flagValue = argv[i];
+        if (flagValue == "-g") world = argv[i+1];
+    }
+
     G4RunManager * runManager = new G4RunManager();
     
-    DetectorConstruction * detector = new DetectorConstruction();
+    DetectorConstruction * detector = new DetectorConstruction(world);
 
     runManager  ->SetUserInitialization(detector);
     runManager  ->SetUserInitialization(new PhysicsList());

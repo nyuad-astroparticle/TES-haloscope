@@ -16,14 +16,15 @@
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
     public:
-        DetectorConstruction();
+        DetectorConstruction(G4String filename);
         ~DetectorConstruction();
-        SensitiveDetector * SD;
         G4VPhysicalVolume * Construct() override;
+        void ConstructSDandField() override;
+        SensitiveDetector * SD;
 
     private:
-        void ConstructSDandField() override;
         G4LogicalVolume * TES = nullptr;
+        G4String filename = nullptr;
 };
 
 #endif

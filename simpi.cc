@@ -14,13 +14,24 @@
 
 int main(int argc, char ** argv)
 {
+    // Flags
+    G4String runNumber  = "1000";
+    G4String world      = "./geometry/worldPM.gdml";
+    for (G4int i = 1; i < argc; i = i+2)
+    {
+        G4String flagValue = argv[i];
+        if (flagValue == "-r") runNumber    = argv[i+1];
+        if (flagValue == "-g") world        = argv[i+1];
+    }
+
+    // Managers
     G4MPImanager * mpiManager   = new G4MPImanager();
     G4RunManager * runManager   = new G4RunManager();
     G4MPIsession * session      = mpiManager->GetMPIsession();
     
     mpiManager  ->SetVerbose(0);
     
-    DetectorConstruction * detector = new DetectorConstruction();
+    DetectorConstruction * detector = new DetectorConstruction(world);
 
     runManager  ->SetUserInitialization(detector);
     runManager  ->SetUserInitialization(new PhysicsList());
@@ -29,13 +40,6 @@ int main(int argc, char ** argv)
     
     session     ->SetPrompt("MPI running \n");
 
-    // Flags
-    G4String runNumber = "1000";
-    for (G4int i = 1; i < argc; i = i+2)
-    {
-        G4String flagValue = argv[i];
-        if (flagValue == "-r") runNumber = argv[i+1];
-    }
 
     // Run beamOn
     mpiManager  ->BeamOn(std::stoi(runNumber));
